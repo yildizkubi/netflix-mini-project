@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Videos - Netflix Clone</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      padding: 0;
+      margin: 0;
+    }
+    .navbar {
+      background-color: #111;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .navbar h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    .navbar input[type="text"] {
+      padding: 8px;
+      border-radius: 4px;
+      border: none;
+      width: 250px;
+    }
+    .main-content {
+      padding: 20px;
+    }
+    h2 {
+      margin-bottom: 15px;
+      border-bottom: 2px solid #e50914;
+      padding-bottom: 5px;
+    }
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .video-card iframe {
+      width: 100%;
+      height: 200px;
+      border: none;
+      border-radius: 10px;
+    }
+    .category {
+      margin-bottom: 40px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <h1>Netflix Clone</h1>
+    <input type="text" id="searchBar" placeholder="Search videos...">
+  </nav>
+
+  <div class="main-content">
+    <div id="categories">
+      <div class="category">
+        <h2>Action</h2>
+        <div class="video-grid">
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/6ZfuNTqbHE8" allowfullscreen title="Avengers"></iframe>
+          </div>
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/tcUUg6nA1gI" allowfullscreen title="John Wick"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="category">
+        <h2>Comedy</h2>
+        <div class="video-grid">
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/_fHfgU8oMSo" allowfullscreen title="Funny Moments"></iframe>
+          </div>
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/2ZIpFytCSVc" allowfullscreen title="Sitcom Clips"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="category">
+        <h2>Documentary</h2>
+        <div class="video-grid">
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/9X6RzRnxPZc" allowfullscreen title="Nature Doc"></iframe>
+          </div>
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/0sEJeWB3K1Y" allowfullscreen title="Space Doc"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+      window.location.href = "login.html";
+    }
+
+    // Basit arama filtreleme
+    const searchBar = document.getElementById("searchBar");
+    searchBar.addEventListener("input", () => {
+      const query = searchBar.value.toLowerCase();
+      const videos = document.querySelectorAll(".video-card iframe");
+      videos.forEach(iframe => {
+        const title = iframe.getAttribute("title").toLowerCase();
+        iframe.parentElement.style.display = title.includes(query) ? "block" : "none";
+      });
+    });
+  </script>
+</body>
+</html>
